@@ -1,0 +1,37 @@
+<div class="container mb-5" style="max-width: 800px;">
+    <h4 class="my-3 shadow-sm p-3 text-center">Edit Product</h4>
+
+    <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+            <label for="title" class="form-label">Product Title :</label>
+            <input type="text" class="form-control" placeholder="Title..." name="prodTitle"  value="{{product.prodTitle}}">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="price" class="form-label">Product Price :</label>
+            <input type="number" class="form-control" placeholder="Price..." name="prodPrice" value="{{product.prodPrice}}">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="category" class="form-label">Product category :</label>
+            <input type="text" class="form-control" placeholder="Category..." name="prodCategory" value="{{product.prodCategory}}">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="description" class="form-label">Product Description :</label>
+            <input type="text" class="form-control" placeholder="Description..." name="prodDescription" value="{{product.prodDescription}}">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="description" class="form-label">Product Image :</label>
+            <img id="imgview" src="/product-images/{{product._id}}.png" alt="" style="width: 100px;height: auto;margin-bottom: 10px;">
+            <input type="file" class="form-control" placeholder="image" name="prodImage" onchange="changeImage(event)">
+        </div>
+
+        
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+
+<script>
+    function changeImage(event){
+        document.getElementById("imgview").src = URL.createObjectURL(event.target.files[0])
+    }
+</script> 

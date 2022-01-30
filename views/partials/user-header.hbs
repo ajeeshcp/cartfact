@@ -1,0 +1,61 @@
+<header style="margin-bottom: 120px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top p-1">
+        <div class="container-fluid" style="font-weight: 500;">
+            <a class="navbar-brand" href="/"><img style="height: 45px;" src="/images/cartFact-logos_transparent.png" alt="cartFact" ></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item  mx-2">
+                        <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-bag-check me-2"></i>Products</a>
+                    </li>
+                     <li class="nav-item mx-2">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-truck me-2"></i>Orders</a>
+                    </li>
+                     
+                        <li class="nav-item mx-2">
+                        <a class="nav-link active" aria-current="page" href="/cart"><i class="bi bi-cart-check me-2"></i>Cart<span class="badge bg-success mx-1" id="cart-count">{{cartCount}}</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
+                          <i class="bi bi-tags me-1"></i>  Category
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Mobile</a></li>
+                            <li><a class="dropdown-item" href="#">Electronics</a></li>
+                            <li><a class="dropdown-item" href="#">Home appliances</a></li>
+                        </ul>
+                    </li>
+                    
+              
+                </ul>
+                <ul class="d-flex pt-3">
+                    <li class="nav-item dropdown mx-2" style="list-style: none;">
+                        <a class="nav-link dropdown-toggle active text-white" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person me-2"></i>
+                            {{#if user}}
+                                {{user.Firstname}}
+                            {{else}}
+                                Account
+                            {{/if}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             {{#if user}}
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            {{else}}
+                               <li><a class="dropdown-item" href="/login">Login</a></li>
+                               <li><a class="dropdown-item" href="/signup">Signup</a></li>
+                            {{/if}}
+                            
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>

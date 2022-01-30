@@ -1,0 +1,51 @@
+
+
+<div class="container mb-5 " style="max-width: 500px;">
+    <h4 class="my-3 shadow-sm p-3 text-center">Login</h4>
+
+    {{#if loginErr}}
+       <div class="alert alert-danger" role="alert ">
+           <i class="bi bi-exclamation-triangle-fill  me-2"></i>
+            Invalid username or password !
+        </div>
+    {{/if}}
+
+    <form action="/login" method="post">
+        <!-- Email input -->
+        <div class="form-outline mb-2">
+            <label class="form-label" for="form1Example1">Email address</label>
+            <input type="email" id="form1Example1" class="form-control" name="Email" required />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example2">Password</label>
+            <input type="password" id="form1Example2" class="form-control" name="Password" required />
+        </div>
+
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+            <!-- Checkbox -->
+            <div class="form-check">
+                <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="form1Example3"
+                checked
+                />
+                <label class="form-check-label" for="form1Example3"> Remember me </label>
+            </div>
+            </div>
+
+            <div class="col">
+            <!-- Simple link -->
+            <a href="/signup">Forgot password ?</a>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-success btn-block px-4">Sign in</button>
+</form>
+</div>
