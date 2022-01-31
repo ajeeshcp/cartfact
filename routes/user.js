@@ -89,8 +89,8 @@ router.get("/cart", verifyLogin ,async(req, res) => {
 })
 
 router.get("/add-to-cart/:id" , (req, res) => {
-  userHelpers.addToCart(req.params.id, req.session.user._id).then(() => {
-    res.json({status:true})
+  userHelpers.addToCart(req.params.id, req.session.user._id).then((data) => {
+    res.json({status:true}) ;
   })
 })
 

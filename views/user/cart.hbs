@@ -7,18 +7,20 @@
             <th scope="col">No</th>
             <th scope="col">Item</th>
             <th scope="col">Image</th>
-            <th scope="col">Count</th>
             <th scope="col">Price</th>
+            <th scope="col">Count</th>
           </tr>
         </thead>
         <tbody>
        {{#each cartProducts}}
           <tr>
             <td>{{@index}}</td>
+            {{#each this.product}}
             <td>{{this.prodTitle}}</td>
             <td><img style="width: 50px;height: 50px;" src="/product-images/{{this._id}}.png" alt=""></td>
-            <td><button type="button" class="btn btn-info">-</button><span class="px-2">1</span><button type="button" class="btn btn-info">+</button></td>
             <td>{{this.prodPrice}}</td>
+            {{/each}}
+            <td><button type="button" class="btn btn-info">-</button><span class="px-2">{{this.quantity}}</span><button type="button" class="btn btn-info">+</button></td>
             <td>
                 <button type="button" class="btn btn-danger me-2">Delete</button>
                 <button type="button" class="btn btn-success">View</button>
