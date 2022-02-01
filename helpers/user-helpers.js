@@ -154,6 +154,20 @@ module.exports = {
                 }
             ).then((response) => resolve(count) )
         })
+    },
+    deleteCartProduct : (prodId, userId) => {
+        return new Promise((resolve, reject) => {
+            get().collection(CART_COLLECTION).updateOne(
+                {
+                    user: new objectId(userId)
+                },
+                {
+                    $pull:{products:{item: new objectId(prodId)}}
+                }
+            ).then((response) => {
+                resolve(response)
+            })
+        })
     }
 
 }

@@ -32,6 +32,7 @@ module.exports = {
             prodId = new objectId(prodId);
             get().collection(PRODUCT_COLLECTION).findOne({_id:prodId}).then((product) => {
                 resolve(product)
+                console.log("enthaddaaa fear ayoo" , product);
             })
         })
     },

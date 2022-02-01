@@ -24,8 +24,8 @@
             <span class="px-2" id="{{this.product._id}}">{{this.quantity}}</span>
             <button type="button" class="btn btn-info" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button></td>
             <td>
-                <button type="button" class="btn btn-danger me-2">Delete</button>
-                <button type="button" class="btn btn-success">View</button>
+                <a href="/delete-cart-product/{{this.product._id}}" type="button" class="btn btn-danger me-2" onclick="return confirm('Are you sure to delete {{this.product.prodTitle}}')">Delete</a>
+                <a href="/detailed-view/{{this.product._id}}" type="button" class="btn btn-success">View</a>
             </td>
         </tr>
       {{/each}}    

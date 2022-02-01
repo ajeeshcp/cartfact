@@ -100,5 +100,18 @@ router.post("/change-product-quantity", (req,res,next) => {
   })
 })
 
+router.get("/delete-cart-product/:id", (req, res) => {
+  userHelpers.deleteCartProduct(req.params.id, req.session.user._id).then((data) =>{
+    res.redirect("/cart")
+  })
+})
+
+router.get("/detailed-view/:id", (req,res) => {
+  let user = req.session.user ;
+  productHelpers.getProductDetails(req.params.id).then((product) => {
+    res.render("user/detailedView",{user, product})
+  })
+})
+
 module.exports = router;
 

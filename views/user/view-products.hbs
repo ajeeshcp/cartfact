@@ -6,9 +6,9 @@
                     <img style="height: 200px;" src="/product-images/{{this._id}}.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title  text-center">{{this.prodTitle}}</h5>
-                        <h6 class="text-success">PRICE : {{this.prodPrice}} &#8377;</h6>
+                        <h5 class="text-success">&#8377; PRICE : {{this.prodPrice}} </h5>
                         <p class="card-text" style=" text-align: justify">{{this.prodDescription}}</p>
-                        <a href="#" class="btn btn-primary me-2">View</a>
+                        <a href="/detailed-view/{{this._id}}" class="btn btn-primary me-2">View</a>
                         <button onclick="addToCart('{{this._id}}')"  class="btn btn-success">Add to cart</button>
                     </div>
                 </div>

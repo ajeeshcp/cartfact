@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6 text-center">
+     <img width="400px" class="img-fluid" src="/product-images/{{product._id}}.png" alt="">
+    </div>
+    <div class="col-md-6 card h-auto p-3 " >
+        <h2>{{product.prodTitle}}</h2>
+        <h3 class="text-secondary">&#8377; {{product.prodPrice}}</h3>
+        <h4 class="text-success fs-6"> Free Delivery</h4>
+        <div class="col-md-12 card my-3 p-3">
+            <h4 class="fs-5">Product Details</h4>
+            <h6>Product Category : {{product.prodCategory}}</h6>
+            <p>{{product.prodDescription}}</p>
+        </div>
+    </div>
+  </div>
+  <div class="row my-5">     
+            <a href="" class="fs-6 btn btn-success col-md-6">Add to cart</a>
+  </div>
+
+</div>
