@@ -68,6 +68,7 @@ module.exports = {
                 if(proExist != -1){
                     get().collection(CART_COLLECTION).updateOne(
                         {
+                            user:user_Id,
                            'products.item': new objectId(prodId)
                         },
                         {
@@ -112,12 +113,18 @@ module.exports = {
                        item:'$products.item',
                        quantity:'$products.quantity'
                    }
-               },{
+               },
+               {
                    $lookup:{
                        from:PRODUCT_COLLECTION,
                        localField:'item',
                        foreignField:'_id',
                        as:'product'
+                   }
+               },
+               {
+                   $project:{
+                       item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
                    }
                }
             ]).toArray();
@@ -132,6 +139,20 @@ module.exports = {
             let cart = await get().collection(CART_COLLECTION).findOne({user: new objectId(userId)})
             cart ? count = cart.products.length : null ;
             resolve(count)
+        })
+    },
+    changeProductQuantity: ({cart,product,count}) => {
+        count = parseInt(count)
+        return new Promise((resolve, reject) =>{
+            get().collection(CART_COLLECTION).updateOne(
+                {
+                    _id:new objectId(cart),
+                   'products.item': new objectId(product)
+                },
+                {
+                    $inc:{'products.$.quantity':count}
+                }
+            ).then((response) => resolve(count) )
         })
     }
 
