@@ -20,9 +20,9 @@
             <td><img style="width: 50px;height: 50px;" src="/product-images/{{this.product._id}}.png" alt=""></td>
             <td>{{this.product.prodPrice}}</td>
            
-            <td><button type="button" class="btn btn-info {{this.product._id}}"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+            <td><button type="button" class="btn btn-info {{this.product._id}}"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
             <span class="px-2" id="{{this.product._id}}">{{this.quantity}}</span>
-            <button type="button" class="btn btn-info" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button></td>
+            <button type="button" class="btn btn-info" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button></td>
             <td>
                 <a href="/delete-cart-product/{{this.product._id}}" type="button" class="btn btn-danger me-2" onclick="return confirm('Are you sure to delete {{this.product.prodTitle}}')">Delete</a>
                 <a href="/detailed-view/{{this.product._id}}" type="button" class="btn btn-success">View</a>
@@ -32,5 +32,18 @@
           
         </tbody>
       </table>
+      <hr>
+      <div class="container">
+        <div class="row py-2">
+          <div class="col">
+            <h5 href="/" class="my-3">Total Amount : <span id="total">{{TotalAmount}}</span> &#8377;</h5>
+          </div>
+          <div class="col">
+            <a href="/place-order" class="float-end btn btn-success px-5">Place Order</a>
+          </div>
+        </div>
+       </div> 
+    
+
 </div> 
 

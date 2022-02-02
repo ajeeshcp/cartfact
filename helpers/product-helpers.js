@@ -4,6 +4,7 @@ const objectId  = require("mongodb").ObjectId
 module.exports = {
 
     addProduct : async(product, callback) => {
+        product.prodPrice=parseInt(product.prodPrice);
 
         get().collection(PRODUCT_COLLECTION).insertOne(product).then((data) => {
             callback(data.insertedId) 
