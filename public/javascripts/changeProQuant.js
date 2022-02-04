@@ -10,6 +10,7 @@
       },
       method:'post',
       success:(response) => {
+        console.log("res",response);
           let count = $(`#${proId}`).html();
           count = parseInt(count)+response.count ;
             $(`#${proId}`).html(count) ;

@@ -1,0 +1,50 @@
+<div class="container mb-5" style="margin-bottom: 2rem; max-width: 1000px;">
+    <h4 class="mb-4">Orders List</h4>
+    {{#each orders}}
+       <div class="accordion" id="accordionExample">
+                <div class="accordion-item mb-2">
+                    <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Order ID : {{this._id}} 
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Category </th>
+                                    <th scope="col">Price </th>
+                                    <th scope="col">Order</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            
+                            {{#each this.products}}    
+                                <tr>
+                                    <td>{{@index}}</td>
+                                    <td><img style="width: 50px;height: 50px;" src="/product-images/{{this._id}}.png" alt=""></td>
+                                    <td>{{this.prodTitle}}</td>
+                                    <td>{{this.prodCategory}}</td>
+                                    <td>{{this.prodPrice}}</td>
+                                    <td>
+                                        <a href="/remove-order-item/{{this._id}}/{{../this._id}}" class="btn btn-danger">Remove</a>
+                                        
+                                    </td>
+                                </tr>
+                            {{/each}}
+                                
+                                </tbody>
+                            </table>
+                            <hr>
+                            <a href="/order-receipt/{{this._id}}" type="button" class="btn btn-success px-4">Order Details</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}    
+  
+</div>

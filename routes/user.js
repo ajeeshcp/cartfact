@@ -85,16 +85,17 @@ router.get("/cart", verifyLogin ,async(req, res) => {
   let user = req.session.user._id ;
   let cartProducts = await userHelpers.getCartProducts(user)
   let TotalAmount = await userHelpers.getTotalAmount(user)
-  res.render("user/cart",{cartProducts,user,TotalAmount})
+  res.render("user/cart",{cartProducts,user:req.session.user._id,TotalAmount})
 })
 
 router.get("/add-to-cart/:id" , (req, res) => {
   userHelpers.addToCart(req.params.id, req.session.user._id).then((data) => {
     res.json({status:true}) ;
-  })
+  }).catch((err) => res.json(err))
 })
 
 router.post("/change-product-quantity", (req,res,next) => {
+  console.log("api calleddddd");
   userHelpers.changeProductQuantity(req.body).then(async(data) => {
     data.TotalAmount = await userHelpers.getTotalAmount(req.body.user)
     res.json(data)
@@ -116,7 +117,60 @@ router.get("/detailed-view/:id", (req,res) => {
 router.get("/place-order",verifyLogin, async(req, res ) => {
   let user = req.session.user ;
   let TotalAmount = await userHelpers.getTotalAmount(user._id)
-  res.render("user/placeOrder",{user,TotalAmount})
+  if(TotalAmount === 0){
+    res.render("user/notFound",{user})
+  }else{
+    res.render("user/placeOrder",{user,TotalAmount})
+  }
+})
+router.post("/place-order", async(req, res) => {
+  
+  let products = await userHelpers.getCartProductsList(req.body.userId) ;
+  let totalPrice =await userHelpers.getTotalAmount(req.body.userId) ;
+  
+  userHelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
+    if(req.body.payment === "cod"){
+      res.json({codSuccess:true})
+    }else{
+      userHelpers.generateRazorpay(orderId,totalPrice).then((response) => {
+        res.json(response)
+      }).catch((err) => {
+        console.log("reject",err);
+      })
+    }
+     
+  })
+} )
+router.get("/orderThanks", (req,res) => {
+  res.render("user/orderThanks",{user:req.session.user})
+})
+router.get("/orders",verifyLogin, (req,res) => {
+  userHelpers.getOrderDetails(req.session.user._id).then((orders) => {
+    res.render("user/orders",{orders,user:req.session.user})
+  }).catch((err) => console.log("err",err))
+})
+router.get("/remove-order-item/:id/:orderId", (req, res) =>{
+  let orderId = req.params.orderId
+  userHelpers.removeOrderItem(req.params.id ,orderId).then(async(response) => {
+    let order = await userHelpers.getOrderItems(orderId);
+    if(order[0].products.length === 0){
+      userHelpers.removeOrder(orderId).then((response) => {
+        resolve()
+      })
+    }
+    res.redirect("/orders")
+
+  })
+})
+router.get("/order-receipt/:orderId" , (req,res) => {
+  let orderId = req.params.orderId ;
+  userHelpers.getOrderItems(orderId).then((data) => {
+    res.render("user/orderReciept",{data:data[0],user:req.session.user})
+  })
+  
+})
+router.post("/verify-payment", (req, res) => {
+  console.log("yahhh",req.body);
 })
 
 module.exports = router;

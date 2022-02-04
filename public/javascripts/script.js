@@ -3,15 +3,15 @@ const addToCart = (proId) => {
         url:"/add-to-cart/"+proId,
         method:'get',
         success:(response) => {
-            
              let count = $('#cart-count').html();
              count = parseInt(count)+1 ;
              $('#cart-count').html(count) ;
-             $(document).ready(function () {
-                
-                    alert("Item added to cart");
-            
+             $(document).ready(function () {              
+                    alert("Item added to cart");   
             });
+        },
+        error:(err) => {
+            location.href="/login"
         }
     })
 }

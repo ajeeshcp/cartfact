@@ -1,26 +1,27 @@
 <div class="container mb-5 ">
     <h3 class="my-4">Enter the Delivery Details</h3>
 
- <form action="" method="post">
+ <form id="checkout-form">
     <div class="row">
         <div class="col-md-5">
             <div class="mb-3">
                 <label for="name" class="form-label">Full name :</label>
-                <input type="text" class="form-control"  name="fullname">
+                <input type="text"  required class="form-control"  name="fullname">
             </div>
             <div class="mb-3 mt-3">
                 <label for="phone" class="form-label">Phone number :</label>
-                <input type="text" class="form-control" name="phone">
+                <input type="text" required  class="form-control" name="phone">
             </div>
             <div class="mb-3 mt-3">
                 <label for="pin" class="form-label">Pin code :</label>
-                <input type="number" class="form-control" name="pincode">
+                <input type="number"  required class="form-control" name="pincode">
             </div>
             <div class="mb-3 mt-3">
                 <label for="address" class="form-label">Address :</label>
-                    <textarea class="form-control" name="address" rows="3"></textarea>
+                    <textarea class="form-control" required  name="address" rows="3"></textarea>
                   
             </div>
+            <input type="text" name="userId" value="{{user._id}}" hidden>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5 card p-3 " style="max-width: 500px; height: fit-content;">
@@ -29,13 +30,13 @@
             <div class="col-md-12 card my-3 p-3">
                 <h4 class="fs-5 pb-2">Payment Method : </h4>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment" checked>
+                        <input class="form-check-input" type="radio" value="cod" name="payment" checked>
                         <label class="form-check-label" for="cod">
                             COD
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="payment">
+                        <input class="form-check-input" value="online" type="radio" name="payment">
                         <label class="form-check-label" for="online">
                             Online Payment
                         </label>
