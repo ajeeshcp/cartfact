@@ -26,12 +26,7 @@ function razorpayPayment(order){
         "image": "https://example.com/your_logo",
         "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         "handler": function (response){
-            console.log("response got");
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature) ;
             verifyPayment(response, order)
-
 
         },
         "prefill": {
@@ -60,12 +55,14 @@ function verifyPayment(payment, order) {
             order
         },
         method:"post",
-        success:(data)=>{
-
-            console.log("heree",data);
+        success:(response)=>{
+            if(response.status){
+                location.href="/orderThanks"
+            }
+            
         },
         error:(err) => {
-            console.log(err);
+            alert("Payment failed");
         } 
     })
 }

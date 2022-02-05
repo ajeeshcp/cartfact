@@ -1,5 +1,5 @@
 const { get } = require("../config/connection");
-const { PRODUCT_COLLECTION } = require("../config/collections");
+const { PRODUCT_COLLECTION, ORDER_COLLECTION } = require("../config/collections");
 const objectId  = require("mongodb").ObjectId
 module.exports = {
 
@@ -49,6 +49,14 @@ module.exports = {
                 }
             }).then((reposnse) => {
                 resolve(reposnse)
+            })
+        })
+    },
+    getOrdersList: () => {
+        return new Promise((resolve, reject) => {
+            get().collection(ORDER_COLLECTION).findOne({status:"placed"}).then((response) => {
+                resolve(response)
+                
             })
         })
     }

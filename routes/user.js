@@ -170,7 +170,14 @@ router.get("/order-receipt/:orderId" , (req,res) => {
   
 })
 router.post("/verify-payment", (req, res) => {
-  console.log("yahhh",req.body);
+  userHelpers.verifyPayment(req.body).then(() => {
+    userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
+      res.json({status:true})
+    })
+  }).catch((err) => {
+    console.log("err",err);
+      res.json({status: false})
+  })
 })
 
 module.exports = router;

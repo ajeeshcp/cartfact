@@ -28,6 +28,10 @@ router.post("/add-product" , (req,res) =>{
   })
 
 })
+router.get("/orders-list",(req, res) => {
+  console.log("hahaa");
+ res.redirect("/admin")
+})
 
 router.get("/delete-product/:id", (req, res) => {
   let prodId = req.params.id ;
