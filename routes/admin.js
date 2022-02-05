@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const productHelpers = require("../helpers/product-helpers")
+const productHelpers = require("../helpers/product-helpers") ;
+const userHelpers = require("../helpers/user-helpers")
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,10 +29,7 @@ router.post("/add-product" , (req,res) =>{
   })
 
 })
-router.get("/orders-list",(req, res) => {
-  console.log("hahaa");
- res.redirect("/admin")
-})
+
 
 router.get("/delete-product/:id", (req, res) => {
   let prodId = req.params.id ;
@@ -52,6 +50,25 @@ router.post("/edit-product/:id", (req, res) => {
       const image = req.files.prodImage ;
       image.mv("./public/product-images/"+req.params.id+".png")
     }
+  })
+})
+router.get("/orders-lists", (req, res) => {
+  productHelpers.getOrdersList().then((products) => {
+    console.log(products);
+    res.render("admin/viewAllOrders",{products,admin:true})
+  }).catch((err) => console.log(err))
+})
+router.get("/view-order-product/:id",(req, res) => {
+  let orderId = req.params.id ;
+  userHelpers.getOrderItems(orderId).then((data) => {
+    console.log("data koii",data);
+    res.render("admin/orderProductview",{data:data[0],admin:true})
+  })
+})
+router.get("/order-ship/:id",(req, res) => {
+  let orderId = req.params.id ;
+  productHelpers.changeProductStatus(orderId).then((response) => {
+      res.redirect("admin/orders-lists");
   })
 })
 

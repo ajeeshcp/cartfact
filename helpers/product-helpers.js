@@ -54,9 +54,21 @@ module.exports = {
     },
     getOrdersList: () => {
         return new Promise((resolve, reject) => {
-            get().collection(ORDER_COLLECTION).findOne({status:"placed"}).then((response) => {
-                resolve(response)
-                
+            get().collection(ORDER_COLLECTION).find({status:"placed"}).toArray().then((response) => {
+                resolve(response) ;
+            })
+        })
+    },
+    changeProductStatus :(orderId) => {
+        return new Promise((resolve, reject) => {
+            get().collection(ORDER_COLLECTION).updateOne({_id: new objectId(orderId)},
+            {
+                $set:{
+                    status:"shipped"
+                }
+            }
+            ).then((data) => {
+                resolve(data)
             })
         })
     }
