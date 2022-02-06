@@ -71,7 +71,7 @@ router.post("/login", (req, res) => {
         }
       })
     }else {
-      res.send("No account found associated with this email account!") 
+      res.render("user/accessDenied")
     }
   })
 })
