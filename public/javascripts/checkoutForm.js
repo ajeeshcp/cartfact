@@ -5,6 +5,7 @@ $("#checkout-form").submit((e) => {
         method:'post',
         data:$("#checkout-form").serialize(),
         success: (response) => {
+            console.log(typeof response);
             if(response.codSuccess){
                 location.href="/orderThanks"
             }else{
@@ -47,7 +48,6 @@ function razorpayPayment(order){
 } 
 
 function verifyPayment(payment, order) {
-    console.log("ivdeyum ethi");
     $.ajax({
         url:"/verify-payment",
         data:{

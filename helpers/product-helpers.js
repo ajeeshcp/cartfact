@@ -1,5 +1,6 @@
 const { get } = require("../config/connection");
-const { PRODUCT_COLLECTION, ORDER_COLLECTION } = require("../config/collections");
+const bcrypt = require("bcrypt") ;
+const { PRODUCT_COLLECTION, ORDER_COLLECTION,ADMIN_COLLECTION } = require("../config/collections");
 const objectId  = require("mongodb").ObjectId
 module.exports = {
 
@@ -70,6 +71,29 @@ module.exports = {
             ).then((data) => {
                 resolve(data)
             })
+        })
+    },
+    doLogin:(loginData) => {
+        return new Promise((resolve, reject) => {
+            let response = {
+                admin:null,
+                status:false,
+            }
+            get().collection(ADMIN_COLLECTION).findOne({Email:loginData.Email}).then((admin) => {
+
+                bcrypt.compare(loginData.Password, admin.Password).then((status) => {
+                    if(status) {
+                        console.log("Login success");
+                        response.admin=admin
+                        response.status=true
+                        resolve(response) ;
+                    } else { 
+                        console.log("Login failed");
+                        resolve({status:false})
+                    }
+                })
+            }).catch((err) => reject(err))
+
         })
     }
 

@@ -1,0 +1,25 @@
+<section>
+    <div class="container my-5">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{this.Firstname}}</td> 
+                    <td>{{this.Lastname}}</td>
+                    <td>{{this.Email}}</td>
+                </tr>
+                {{/each}}
+            
+            </tbody>
+        </table>
+    </div>
+</section>

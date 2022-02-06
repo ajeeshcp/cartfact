@@ -1,0 +1,30 @@
+
+
+<div class="container mb-5 " style="max-width: 500px;">
+    <h4 class="my-3 shadow-sm p-3 text-center">Admin Login</h4>
+
+    {{#if loginErr}}
+       <div class="alert alert-danger" role="alert ">
+           <i class="bi bi-exclamation-triangle-fill  me-2"></i>
+            Invalid username or password !
+        </div>
+    {{/if}}
+
+    <form action="/admin/login" method="post">
+        <!-- Email input -->
+        <div class="form-outline mb-2">
+            <label class="form-label" for="form1Example1">Email address</label>
+            <input type="email" id="form1Example1" class="form-control" name="Email" required />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example2">Password</label>
+            <input type="password" id="form1Example2" class="form-control" name="Password" required />
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-success btn-block px-4">Sign in</button>
+</form>
+</div>

@@ -1,5 +1,5 @@
 const { get } = require("../config/connection");
-const { USER_COLLECTION, CART_COLLECTION, PRODUCT_COLLECTION,ORDER_COLLECTION } = require("../config/collections") ;
+const { USER_COLLECTION, CART_COLLECTION, PRODUCT_COLLECTION,ORDER_COLLECTION,ADMIN_COLLECTION } = require("../config/collections") ;
 const bcrypt = require("bcrypt") ;
 const objectId  = require("mongodb").ObjectId ;
 const Razorpay = require('razorpay') ;
@@ -135,8 +135,12 @@ module.exports = {
                    }
                }
             ]).toArray();
-           
-            resolve(cartItems)
+           if(cartItems){
+
+               resolve(cartItems)
+           }else{
+               reject("error")
+           }
         });
        
     },
@@ -364,6 +368,13 @@ module.exports = {
             }
             ).then(() => {
                 resolve()
+            })
+        })
+    },
+    getAllUsers :() => {
+        return new Promise((resolve, reject) => {
+            get().collection(USER_COLLECTION).find().toArray().then((users) => {
+                resolve(users)
             })
         })
     }
