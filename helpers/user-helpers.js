@@ -377,6 +377,13 @@ module.exports = {
                 resolve(users)
             })
         })
+    },
+    getUserDetails :(userId) => {
+        return new Promise((resolve, reject) => {
+            get().collection(USER_COLLECTION).findOne({_id: new objectId(userId)}).then((user) => {
+                resolve(user)
+            })
+        })
     }
 
 }

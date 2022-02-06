@@ -190,5 +190,11 @@ router.post("/verify-payment", (req, res) => {
   })
 })
 
+router.get("/profile" , verifyLogin,(req, res) => {
+  userHelpers.getUserDetails(req.session.user._id).then((user) => {
+    res.render("user/profilePage",{user})
+  })
+})
+
 module.exports = router;
 
